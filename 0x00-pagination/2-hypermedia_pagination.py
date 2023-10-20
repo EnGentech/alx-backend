@@ -51,7 +51,7 @@ class Server:
 
         return self.dataset()[start: end]
 
-    def get_hyper(self, page: int = 0, page_size: int = 0) -> Dict:
+    def get_hyper(self, page: int = 0, page_size: int = 0) -> dict:
         """
         document statistics
         """
