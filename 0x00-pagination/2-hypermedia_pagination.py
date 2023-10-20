@@ -8,7 +8,7 @@ to return an index corresponding to the user input
 
 import csv
 import math
-from typing import List
+from typing import List, Dict
 
 
 def index_range(page: int, page_size: int) -> tuple:
@@ -51,7 +51,7 @@ class Server:
 
         return self.dataset()[start: end]
 
-    def get_hyper(self, page: int = 0, page_size: int = 0) -> dict:
+    def get_hyper(self, page: int = 0, page_size: int = 0) -> Dict:
         """
         document statistics
         """
