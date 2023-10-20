@@ -51,7 +51,7 @@ class Server:
 
         return self.dataset()[start: end]
 
-    def get_hyper(self, page: int = 0, page_size: int = 0) -> List[List]:
+    def get_hyper(self, page: int = 0, page_size: int = 0) -> dict:
         """
         document statistics
         """
@@ -59,7 +59,7 @@ class Server:
         previous_page = None if page - 1 <= 0 else page - 1
         next_page = None if page + 1 > total_pages else page + 1
         data = self.get_page(page, page_size)
-        
+
         stat = {
             'page_size': len(data),
             'page': page,
