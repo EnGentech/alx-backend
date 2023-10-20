@@ -5,6 +5,7 @@ Description: This code is written with two parameters of a function
 to return an index corresponding to the user input
 """
 
+
 def index_range(page: int, page_size: int) -> tuple:
     """
     This function is defined to fine the start and end pagination
