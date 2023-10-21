@@ -8,7 +8,7 @@ to return an index corresponding to the user input
 
 import csv
 import math
-from typing import List, Dict
+from typing import List
 
 
 def index_range(page: int, page_size: int) -> tuple:
