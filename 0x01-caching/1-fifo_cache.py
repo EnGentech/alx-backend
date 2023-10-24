@@ -26,9 +26,6 @@ class FIFOCache(BaseCaching):
 
     def get(self, key):
         """retrieve item from storage"""
-        if key in self.cache_data:
-            return self.cache_data.get(key)
-        else:
-            return None
+        return self.cache_data.get(key, None)
 
 # Coded by EnGentech
