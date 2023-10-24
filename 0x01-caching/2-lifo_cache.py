@@ -16,15 +16,17 @@ class LIFOCache(BaseCaching):
         """insert into cache_data __dict__"""
         cache_data_count = len(self.cache_data)
 
-        if cache_data_count >= self.MAX_ITEMS and key not in self.cache_data:
-            lastItem = self.track
-            print(f"Discard: {lastItem}")
-            self.cache_data.pop(lastItem)
-            self.cache_data[key] = item
-            self.track = key
-        else:
-            self.cache_data[key] = item
-            self.track = key
+        if key and item:
+            if cache_data_count >= self.MAX_ITEMS \
+                    and key not in self.cache_data:
+                lastItem = self.track
+                print(f"Discard: {lastItem}")
+                self.cache_data.pop(lastItem)
+                self.cache_data[key] = item
+                self.track = key
+            else:
+                self.cache_data[key] = item
+                self.track = key
 
     def get(self, key):
         """retrieve item from storage"""
