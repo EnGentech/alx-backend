@@ -1,0 +1,1 @@
+Caching is all about storing frequently used data for quick access  
