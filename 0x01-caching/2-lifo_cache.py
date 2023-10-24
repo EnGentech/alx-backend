@@ -13,20 +13,14 @@ class LIFOCache(BaseCaching):
         self.track = ''
 
     def put(self, key, item):
-        """insert into cache_data __dict__"""
-        cache_data_count = len(self.cache_data)
-
+        """insert into cache_data __dict__
+        whit poping the last if list exceeds limit
+        """
         if key and item:
-            if cache_data_count >= self.MAX_ITEMS \
-                    and key not in self.cache_data:
-                lastItem = self.track
-                print(f"Discard: {lastItem}")
-                self.cache_data.pop(lastItem)
-                self.cache_data[key] = item
-                self.track = key
-            else:
-                self.cache_data[key] = item
-                self.track = key
+            self.cache_data[key] = item
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            first_key, _ = self.cache_data.popitem(True)
+            print("DISCARD:", first_key)
 
     def get(self, key):
         """retrieve item from storage"""

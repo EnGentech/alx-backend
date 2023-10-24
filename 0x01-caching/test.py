@@ -8,5 +8,5 @@ mydict['first'] = 'firstvalue'
 mydict['second'] = 'secondvalue'
 mydict['third'] = 'thirdvalue'
 
-lastValue = list(mydict.keys())[-1]
-print(mydict.keys())
+mydict.popitem(True)
+print(mydict)

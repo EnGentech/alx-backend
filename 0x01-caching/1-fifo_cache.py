@@ -12,7 +12,8 @@ class FIFOCache(BaseCaching):
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """Adds an item in the cache.
+        """Adds an item in the cache
+        while deleting the first in the list.
         """
         if key and item:
             self.cache_data[key] = item
