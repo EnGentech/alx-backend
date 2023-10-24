@@ -12,18 +12,13 @@ class FIFOCache(BaseCaching):
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """insert into cache_data __dict__"""
+        """Adds an item in the cache.
+        """
         if key and item:
-            cache_data_count = len(self.cache_data)
-
-            if cache_data_count >= self.MAX_ITEMS \
-                    and key not in self.cache_data:
-                firstItem = next(iter(self.cache_data.keys()))
-                print(f"Discard: {firstItem}")
-                self.cache_data.pop(firstItem)
-                self.cache_data[key] = item
-            else:
-                self.cache_data[key] = item
+            self.cache_data[key] = item
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            first_key, _ = self.cache_data.popitem(False)
+            print("DISCARD:", first_key)
 
     def get(self, key):
         """retrieve item from storage"""
