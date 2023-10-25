@@ -8,5 +8,6 @@ mydict['first'] = 'firstvalue'
 mydict['second'] = 'secondvalue'
 mydict['third'] = 'thirdvalue'
 
-mydict.popitem(True)
-print(mydict)
+mydict.move_to_end('first', last=True)
+print(mydict.popitem(False))
+

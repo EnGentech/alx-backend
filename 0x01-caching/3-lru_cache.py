@@ -10,7 +10,7 @@ class LRUCache(BaseCaching):
     def __init__(self):
         super().__init__()
         self.cache_data = OrderedDict()
-        self.track = ''
+        self.track = []
 
     def put(self, key, item):
         """insert into cache_data __dict__"""
@@ -19,18 +19,14 @@ class LRUCache(BaseCaching):
         if key and item:
             if cache_data_count >= self.MAX_ITEMS \
                     and key not in self.cache_data:
-                lastItem = self.track
-                print(f"Discard: {lastItem}")
-                self.cache_data.pop(lastItem)
-                self.cache_data[key] = item
-                self.track = key
-            else:
-                self.cache_data[key] = item
-                self.track = key
+                firstKey, _ = self.cache_data.popitem(False)
+                print(f"Discard: {firstKey}")
+            self.cache_data[key] = item
 
     def get(self, key):
         """retrieve item from storage"""
         if key in self.cache_data:
+            self.cache_data.move_to_end(key, last=True)
             return self.cache_data.get(key)
         else:
             return None
