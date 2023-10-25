@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""LRU caching"""
+"""MRU caching"""
 
 from base_caching import BaseCaching
 from collections import OrderedDict
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """class definition"""
     def __init__(self):
         super().__init__()
@@ -17,7 +17,7 @@ class LRUCache(BaseCaching):
         if key and item:
             if key not in self.cache_data:
                 if len(self.cache_data) >= self.MAX_ITEMS:
-                    firstKey, _ = self.cache_data.popitem(True)
+                    firstKey, _ = self.cache_data.popitem(False)
                     print("DISCARD:", firstKey)
                 self.cache_data[key] = item
                 self.cache_data.move_to_end(key, last=False)
