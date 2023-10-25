@@ -5,7 +5,7 @@ from base_caching import BaseCaching
 from collections import OrderedDict
 
 
-class LIFOCache(BaseCaching):
+class LRUCache(BaseCaching):
     """class definition"""
     def __init__(self):
         super().__init__()
@@ -14,14 +14,19 @@ class LIFOCache(BaseCaching):
 
     def put(self, key, item):
         """insert into cache_data __dict__"""
-        if key is None or item is None:
-            return
-        if key not in self.cache_data:
-            if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
-                last_key, _ = self.cache_data.popitem(True)
-                print("DISCARD:", last_key)
-        self.cache_data[key] = item
-        self.cache_data.move_to_end(key, last=True)
+        cache_data_count = len(self.cache_data)
+
+        if key and item:
+            if cache_data_count >= self.MAX_ITEMS \
+                    and key not in self.cache_data:
+                lastItem = self.track
+                print(f"Discard: {lastItem}")
+                self.cache_data.pop(lastItem)
+                self.cache_data[key] = item
+                self.track = key
+            else:
+                self.cache_data[key] = item
+                self.track = key
 
     def get(self, key):
         """retrieve item from storage"""
