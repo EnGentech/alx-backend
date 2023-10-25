@@ -14,17 +14,17 @@ class LRUCache(BaseCaching):
 
     def put(self, key, item):
         """insert into cache_data __dict__"""
-        cache_data_count = len(self.cache_data)
-
-        if key and item:
-            if cache_data_count >= self.MAX_ITEMS \
-                    and key not in self.cache_data:
-                firstKey, _ = self.cache_data.popitem(True)
-                print(f"Discard: {firstKey}")
-                self.cache_data[key] = item
-                self.cache_data.move_to_end(key, last=False)
+        if key is None or item is None:
+            return
+        if key not in self.cache_data:
+            if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
+                lru_key, _ = self.cache_data.popitem(True)
+                print("DISCARD:", lru_key)
             self.cache_data[key] = item
-            
+            self.cache_data.move_to_end(key, last=False)
+        else:
+            self.cache_data[key] = item
+
     def get(self, key):
         """retrieve item from storage"""
         if key in self.cache_data:
