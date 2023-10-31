@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-
+"""
+Basic flask config
+"""
 
 from flask import Flask, render_template
 
